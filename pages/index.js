@@ -15,7 +15,7 @@ export async function getStaticProps(context) {
   };
 }
 
-export default function Home({ products, categories }) {
+export default function Home({ products, categories, addToCart }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
@@ -80,13 +80,24 @@ export default function Home({ products, categories }) {
 
             <h2
               id="all-products-heading"
-              className="text-center text-red-500 font-extrabold text-4xl"
+              className="text-center text-red-500 font-extrabold text-4xl cursor-pointer"
             >
               All Products
             </h2>
-            <ul aria-labelledby="all-products-heading">
+            <ul aria-labelledby="all-products-heading ">
               {products.map((product) => {
-                return <li key={product.id}>{product.name}</li>;
+                return <li key={product.id} onClick={() => {addToCart(product.id)}} >{product.name}</li>;
+                // return (
+                //   <li
+                //     key={product.id}
+                //     onClick={() => {
+                //       console.log("clicked");
+                //     }}
+                //     className="cursor-pointer text-green-500 "
+                //   >
+                //     {product.name}
+                //   </li>
+                // );
               })}
             </ul>
           </>

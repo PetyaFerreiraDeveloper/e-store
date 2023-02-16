@@ -5,14 +5,17 @@ import { useEffect, useState } from "react";
 export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState();
 
-  useEffect(async () => {
-    const response = await commerce.cart.retrieve();
-    setCart(response);
+  useEffect(() => {
+    async () => {
+      const response = await commerce.cart.retrieve();
+      setCart(response);
+    }
   }, []);
 
   const addToCart = async (productID) => {
     const response = await commerce.cart.add(productID, 1);
     setCart(response.cart);
+    console.log(response);
     return;
   };
 
