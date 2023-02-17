@@ -15,4 +15,8 @@ describe('Cart details page', () => {
         const listItems =getAllByRole('listitem');
         expect(listItems.length).toBe(2);
     })
+
+    it('renders message if cart is empty', () => {
+        render(<CartDetail cart={} updateQuantity={jest.fn()} emptyCart={jest.fn()} />)
+    })
 })
