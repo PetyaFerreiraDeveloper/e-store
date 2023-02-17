@@ -3,19 +3,41 @@ import commerce from "../lib/commerce";
 import { useEffect, useState } from "react";
 
 export default function App({ Component, pageProps }) {
-  const [cart, setCart] = useState();
+  const [cart, setCart] = useState({});
+  
+  // commerce.cart.retrieve().then((result) => {return result}).then(data => { console.log(data)});
+
+
+
+  // const retrieveData = async () => {
+  //   const response = await commerce.cart.retrieve();
+  //   setCart(response);
+  // }
+
+  // useEffect(() => {
+  //   retrieveData();
+  // }, [])
 
   useEffect(() => {
-    async () => {
+   
+    const getData = async () => {
       const response = await commerce.cart.retrieve();
       setCart(response);
+      console.log('created', cart);
     }
+
+    getData()
+
   }, []);
+
+  useEffect(() => {
+    console.log('updted cart', cart);
+  }, [cart])
 
   const addToCart = async (productID) => {
     const response = await commerce.cart.add(productID, 1);
-    setCart(response.cart);
-    console.log(response);
+    setCart(response);
+    // console.log('added product', cart);
     return;
   };
 
@@ -36,6 +58,7 @@ export default function App({ Component, pageProps }) {
   const emptyCart = async () => {
     let response = await commerce.cart.empty();
     setCart(response.cart);
+    // console.log('deleted', cart)
   };
 
   const refreshCart = async () => {

@@ -15,7 +15,7 @@ export async function getStaticProps(context) {
   };
 }
 
-export default function Home({ products, categories, addToCart }) {
+export default function Home({ products, categories, addToCart, emptyCart }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   return (
@@ -84,22 +84,29 @@ export default function Home({ products, categories, addToCart }) {
             >
               All Products
             </h2>
-            <ul aria-labelledby="all-products-heading ">
+            <ul aria-labelledby="all-products-heading">
               {products.map((product) => {
-                return <li key={product.id} onClick={() => {addToCart(product.id)}} >{product.name}</li>;
-                // return (
-                //   <li
-                //     key={product.id}
-                //     onClick={() => {
-                //       console.log("clicked");
-                //     }}
-                //     className="cursor-pointer text-green-500 "
-                //   >
-                //     {product.name}
-                //   </li>
-                // );
+                return (
+                  <li
+                    key={product.id}
+                    onClick={() => addToCart(product.id)}
+                    className="cursor-pointer hover:text-blue-700"
+                  >
+                    {product.name}
+                  </li>
+                );
               })}
             </ul>
+
+            <button
+              onClick={() => {
+                emptyCart();
+              }}
+            >
+              {" "}
+              Delete{" "}
+            </button>
+            {/* <div onClick={() => addToCart('prod_p6dP5gMnp8wn7k')}> add to cart</div>  */}
           </>
         )}
       </main>
