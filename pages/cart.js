@@ -14,15 +14,23 @@ export default function CartDetail({ cart, updateQuantity, emptyCart }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex flex-col justify-center items-center">
-        <Link href="/" className="bg-slate-300 text-blue-600 p-5 mb-10">Go to Main Page</Link>
+        <Link href="/" className="bg-slate-300 text-blue-600 p-5 mb-10">
+          Go to Main Page
+        </Link>
         {cart.line_items.length !== 0 ? (
           <>
-            {cart.subtotal ? <p>{cart.subtotal.raw}</p> : <p>no subtotal</p>}
             <h3>Cart Total Price: {cart.subtotal.formatted_with_symbol}</h3>
             <h4 id="cart-items-heading">Cart items: </h4>
             <ul aria-labelledby="cart-items-heading">
               {cart.line_items.map((item) => {
-                return <li key={item.id}>{item.name}</li>;
+                return (
+                  <li key={item.id}>
+                    <p>{item.name}</p>
+                    <small>
+                    {item.price.formatted_with_symbol} X {item.quantity} = {item.line_total.formatted_with_symbol}
+                    </small>
+                  </li>
+                );
               })}
             </ul>
           </>
@@ -33,3 +41,5 @@ export default function CartDetail({ cart, updateQuantity, emptyCart }) {
     </>
   );
 }
+
+// x{item.quantity}={item.line_total.formatted_with_symbol}

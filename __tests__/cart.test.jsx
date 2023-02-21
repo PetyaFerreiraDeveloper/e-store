@@ -8,7 +8,7 @@ import { mockCart } from '../__mocks__/mockData';
 describe('Cart details page', () => {
     it('render total cart price', () => {
         render(<CartDetail cart={mockCart} updateQuantity={jest.fn()} emptyCart={jest.fn()} />);
-        screen.getByText(/Cart Total Price: kr384.00/i);
+        screen.getByText(/Cart Total Price: kr684.00/i);
         const line_items = screen.getByRole('list', {name:/cart items/i});
         const {getAllByRole}=within(line_items);
         const listItems =getAllByRole('listitem');
@@ -45,5 +45,13 @@ describe('Cart details page', () => {
     it('renders loading if cart is undefined', () => {
       render(<CartDetail cart={{}} updateQuantity={jest.fn()} emptyCart={jest.fn()} />)
       screen.getByText(/Loading.../i)
+    });
+
+    it('renders line items properly', () => {
+      render(<CartDetail cart={mockCart} updateQuantity={jest.fn()} emptyCart={jest.fn()} />);
+      screen.getByText(/kr150.00 X 3 = kr450.00/i)
+      screen.getByText(/kr234.00 X 1 = kr234.00/i)
+      // screen.getByText(/kr150x3=kr450/i);
+      // screen.getByText(/kr234x1=kr234/i);
     })
 })
