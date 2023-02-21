@@ -3,6 +3,7 @@ import { Inter } from "@next/font/google";
 import style from "../styles/Home.module.css";
 import commerce from "../lib/commerce";
 import { useState } from "react";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,11 @@ export default function Home({ products, categories, addToCart, emptyCart }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <header className="flex justify-center ">
+        <Link href="/cart" className="text-center bg-slate-300 text-blue-600 p-5">
+          Go to BASKET
+        </Link>
+      </header>
       <main className={`${style.main} `}>
         <input
           value={searchTerm}
@@ -106,6 +112,7 @@ export default function Home({ products, categories, addToCart, emptyCart }) {
               {" "}
               Delete{" "}
             </button>
+
             {/* <div onClick={() => addToCart('prod_p6dP5gMnp8wn7k')}> add to cart</div>  */}
           </>
         )}

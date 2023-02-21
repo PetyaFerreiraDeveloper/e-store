@@ -1,10 +1,10 @@
 import React from "react";
 import Head from "next/head";
+import Link from "next/link";
 
 export default function CartDetail({ cart, updateQuantity, emptyCart }) {
   console.log(cart);
-  if (!cart) return <span>Loading...</span>;
-  // console.log(cart.currency.code)
+  if (Object.keys(cart).length === 0) return <span>Loading...</span>;
   return (
     <>
       <Head>
@@ -13,13 +13,11 @@ export default function CartDetail({ cart, updateQuantity, emptyCart }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        {cart ? (
+      <main className="flex flex-col justify-center items-center">
+        <Link href="/" className="bg-slate-300 text-blue-600 p-5 mb-10">Go to Main Page</Link>
+        {cart.line_items.length !== 0 ? (
           <>
-            <p>There is cart</p>
             {cart.subtotal ? <p>{cart.subtotal.raw}</p> : <p>no subtotal</p>}
-            {}
-
             <h3>Cart Total Price: {cart.subtotal.formatted_with_symbol}</h3>
             <h4 id="cart-items-heading">Cart items: </h4>
             <ul aria-labelledby="cart-items-heading">

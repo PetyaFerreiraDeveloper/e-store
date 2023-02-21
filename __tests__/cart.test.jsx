@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 
 import CartDetail from '../pages/cart';
 import { mockCart } from '../__mocks__/mockData';
-import { list } from 'postcss';
 
 describe('Cart details page', () => {
     it('render total cart price', () => {
@@ -41,5 +40,10 @@ describe('Cart details page', () => {
           }
         render(<CartDetail cart={zeroItemsCart} updateQuantity={jest.fn()} emptyCart={jest.fn()} />)
         screen.getByText(/Please Buy Something/i)
+    });
+
+    it('renders loading if cart is undefined', () => {
+      render(<CartDetail cart={{}} updateQuantity={jest.fn()} emptyCart={jest.fn()} />)
+      screen.getByText(/Loading.../i)
     })
 })

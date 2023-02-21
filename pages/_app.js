@@ -4,35 +4,19 @@ import { useEffect, useState } from "react";
 
 export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState({});
-  
-  // commerce.cart.retrieve().then((result) => {return result}).then(data => { console.log(data)});
-
-
-
-  // const retrieveData = async () => {
-  //   const response = await commerce.cart.retrieve();
-  //   setCart(response);
-  // }
-
-  // useEffect(() => {
-  //   retrieveData();
-  // }, [])
 
   useEffect(() => {
-   
     const getData = async () => {
       const response = await commerce.cart.retrieve();
       setCart(response);
-      console.log('created', cart);
+      // console.log('created', cart);
     }
-
     getData()
-
   }, []);
 
-  useEffect(() => {
-    console.log('updted cart', cart);
-  }, [cart])
+  // useEffect(() => {
+  //   console.log('updted cart', cart);
+  // }, [cart])
 
   const addToCart = async (productID) => {
     const response = await commerce.cart.add(productID, 1);
