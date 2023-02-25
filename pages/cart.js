@@ -5,6 +5,10 @@ import Link from "next/link";
 export default function CartDetail({ cart, updateQuantity, emptyCart }) {
   console.log(cart);
   if (Object.keys(cart).length === 0) return <span>Loading...</span>;
+
+  const handleUpdateQuantity = async (productId, quantity) => {
+    await updateQuantity(productId, quantity);
+  }
   return (
     <>
       <Head>
@@ -19,16 +23,21 @@ export default function CartDetail({ cart, updateQuantity, emptyCart }) {
         </Link>
         {cart.line_items.length !== 0 ? (
           <>
-            <h3>Cart Total Price: {cart.subtotal.formatted_with_symbol}</h3>
-            <h4 id="cart-items-heading">Cart items: </h4>
-            <ul aria-labelledby="cart-items-heading">
+            <h3 className="mb-10">Cart Total Price: {cart.subtotal.formatted_with_symbol}</h3>
+            <h4 id="cart-items-heading" className="mb-10">Cart items: </h4>
+            <ul aria-labelledby="cart-items-heading" className="flex flex-col gap-y-10">
               {cart.line_items.map((item) => {
                 return (
-                  <li key={item.id}>
+                  <li key={item.id} className="flex flex-col">
                     <p>{item.name}</p>
-                    <small>
+                    <small className="mb-5">
                     {item.price.formatted_with_symbol} X {item.quantity} = {item.line_total.formatted_with_symbol}
                     </small>
+                    <div className="flex flex-1 justify-between w-32">
+                      <button onClick={() => {handleUpdateQuantity(item.id, item.quantity + 1)}} className="px-5 bg-green-100 rounded-md">+</button>
+                      <span >{item.quantity}</span>
+                      <button className="px-5 bg-red-100 rounded-md">-</button>
+                    </div>
                   </li>
                 );
               })}

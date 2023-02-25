@@ -14,10 +14,6 @@ export default function App({ Component, pageProps }) {
     getData()
   }, []);
 
-  // useEffect(() => {
-  //   console.log('updted cart', cart);
-  // }, [cart])
-
   const addToCart = async (productID) => {
     const response = await commerce.cart.add(productID, 1);
     setCart(response);
@@ -29,19 +25,19 @@ export default function App({ Component, pageProps }) {
     let response = await commerce.cart.update(productID, {
       quantity: quantity,
     });
-    setCart(response.cart);
+    setCart(response);
     return;
   };
 
   const removeItem = async (productID) => {
     let response = await commerce.cart.remove(productID);
-    setCart(response.cart);
+    setCart(response);
     return;
   };
 
   const emptyCart = async () => {
     let response = await commerce.cart.empty();
-    setCart(response.cart);
+    setCart(response);
     // console.log('deleted', cart)
   };
 
