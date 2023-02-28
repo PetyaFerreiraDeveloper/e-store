@@ -4,6 +4,7 @@ import style from "../styles/Home.module.css";
 import commerce from "../lib/commerce";
 import { useState } from "react";
 import Link from "next/link";
+import Product from "../components/Product/Product";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +29,10 @@ export default function Home({ products, categories, addToCart, emptyCart }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <header className="flex justify-center ">
-        <Link href="/cart" className="text-center bg-slate-300 text-blue-600 p-5">
+        <Link
+          href="/cart"
+          className="text-center bg-slate-300 text-blue-600 p-5"
+        >
           Go to BASKET
         </Link>
       </header>
@@ -54,7 +58,16 @@ export default function Home({ products, categories, addToCart, emptyCart }) {
                   product.name.toLowerCase().includes(searchTerm.toLowerCase())
                 )
                 .map((product) => {
-                  return <li key={product.id}>{product.name}</li>;
+                  return (
+                    <li key={product.id}>
+                      <Product
+                        product={product}
+                        addToCart={() => {
+                          addToCart(product.id);
+                        }}
+                      />
+                    </li>
+                  );
                 })}
             </ul>
           </>
@@ -76,7 +89,16 @@ export default function Home({ products, categories, addToCart, emptyCart }) {
                           product.categories.find((c) => c.id === category.id)
                         )
                         .map((product) => {
-                          return <li key={product.id}>{product.name}</li>;
+                          return (
+                            <li key={product.id}>
+                              <Product
+                                product={product}
+                                addToCart={() => {
+                                  addToCart(product.id);
+                                }}
+                              />
+                            </li>
+                          );
                         })}
                     </ul>
                   </li>
@@ -95,10 +117,15 @@ export default function Home({ products, categories, addToCart, emptyCart }) {
                 return (
                   <li
                     key={product.id}
-                    onClick={() => addToCart(product.id)}
                     className="cursor-pointer hover:text-blue-700"
                   >
-                    {product.name}
+                    {/* {product.name} */}
+                    <Product
+                      product={product}
+                      addToCart={() => {
+                        addToCart(product.id);
+                      }}
+                    />
                   </li>
                 );
               })}
