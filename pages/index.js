@@ -132,6 +132,7 @@ export default function Home({ products, categories, addToCart, emptyCart }) {
             </ul>
 
             <button
+              className="bg-gray-100 rounded-md px-8 py-2"
               onClick={() => {
                 emptyCart();
               }}

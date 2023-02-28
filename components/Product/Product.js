@@ -2,11 +2,12 @@ import React from 'react'
 
 const Product = ({product, addToCart}) => {
   return (
-    <div>
+    <div className="flex flex-col gap-y-2 items-start mb-10">
+      <div className="flex gap-5">
         <h5>{product.name}</h5>
-        <h5>{product.permalink}</h5>
         <p>{product.price?.formatted_with_symbol}</p>
-        <button onClick={addToCart}>Add to cart</button>
+      </div>
+        <button onClick={addToCart} className="bg-gray-100 rounded-md px-8 py-2">Add to cart</button>
     </div>
   )
 }
