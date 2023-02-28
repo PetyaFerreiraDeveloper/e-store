@@ -2,7 +2,6 @@ import React from "react";
 import { render, screen} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-
 import Product from "./Product";
 import { mockProduct } from "../../__mocks__/mockProduct";
 
@@ -16,6 +15,5 @@ describe('Product Component',  () => {
 
         await userEvent.click(addToCartBtn);
         expect(addToCart).toBeCalled();
-
     });
 });

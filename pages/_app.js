@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import commerce from "../lib/commerce";
 import { useEffect, useState } from "react";
+import Navbar from "../components/Navbar/Navbar";
 
 export default function App({ Component, pageProps }) {
   const [cart, setCart] = useState({});
@@ -10,8 +11,8 @@ export default function App({ Component, pageProps }) {
       const response = await commerce.cart.retrieve();
       setCart(response);
       // console.log('created', cart);
-    }
-    getData()
+    };
+    getData();
   }, []);
 
   const addToCart = async (productID) => {
@@ -47,14 +48,17 @@ export default function App({ Component, pageProps }) {
   };
 
   return (
-    <Component
-      cart={cart}
-      addToCart={addToCart}
-      updateQuantity={updateQuantity}
-      removeItem={removeItem}
-      emptyCart={emptyCart}
-      refreshCart={refreshCart}
-      {...pageProps}
-    />
+    <>
+      <Navbar />
+      <Component
+        cart={cart}
+        addToCart={addToCart}
+        updateQuantity={updateQuantity}
+        removeItem={removeItem}
+        emptyCart={emptyCart}
+        refreshCart={refreshCart}
+        {...pageProps}
+      />
+    </>
   );
 }

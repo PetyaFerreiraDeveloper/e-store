@@ -23,9 +23,7 @@ export default function CartDetail({ cart, updateQuantity, emptyCart }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex flex-col justify-center items-center">
-        <Link href="/" className="bg-slate-300 text-blue-600 p-5 mb-10">
-          Go to Main Page
-        </Link>
+       
         {cart.line_items.length !== 0 ? (
           <>
             <h3 className="mb-10">
