@@ -1,5 +1,4 @@
-import React from "react";
-import { render, screen, within } from "@testing-library/react";
+import { render, screen, waitForElementToBeRemoved, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import CartDetail from "../pages/cart";
@@ -75,6 +74,9 @@ describe("Cart details page", () => {
     screen.getAllByRole("button", { name: "-" });
     screen.getByText("3");
     screen.getByText("1");
+
+    screen.getByRole('button', {name: /Empty Cart/i});
+    screen.getByRole('link', {name: /Checkout/i});
   });
 
   it("increments quantity correclty",async () => {
@@ -94,5 +96,30 @@ describe("Cart details page", () => {
 
     expect(updateQuantity).toBeCalled();
     expect(updateQuantity).toBeCalledWith("item_7RyWOwmK5nEa2V", 4);
+    // await waitForElementToBeRemoved(()=>{screen.getByText(/updating/i)});
   });
+
+  it('decreases quantity correctly', async () => {
+    const updateQuantity = jest.fn();
+    render(<CartDetail cart={mockCart} updateQuantity={updateQuantity} emptyCart={jest.fn()} />);
+
+    const firstItem = screen.getAllByRole('listitem')[0];
+    const {getByRole} = within(firstItem);
+    const decreaseBtn = getByRole('button', {name: '-'});
+
+    await userEvent.click(decreaseBtn);
+    expect(updateQuantity).toBeCalled();
+    expect(updateQuantity).toBeCalledWith("item_7RyWOwmK5nEa2V", 2);
+    // await waitForElementToBeRemoved(()=>{screen.getByText(/updating/i)});
+
+  });
+
+  it('empties cart, when empty cart button clicked', async () => {
+    const emptyCart = jest.fn();
+    render(<CartDetail cart={mockCart} updateQuantity={jest.fn()} emptyCart={emptyCart} />)
+
+    await userEvent.click(screen.getByRole('button', {name: /empty cart/i}));
+    expect(emptyCart).toBeCalled();
+  })
+
 });

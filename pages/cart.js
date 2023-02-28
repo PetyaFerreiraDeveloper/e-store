@@ -1,14 +1,19 @@
 import React from "react";
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function CartDetail({ cart, updateQuantity, emptyCart }) {
+  const [loading, setLoading] = useState(undefined);
+
   console.log(cart);
   if (Object.keys(cart).length === 0) return <span>Loading...</span>;
 
   const handleUpdateQuantity = async (productId, quantity) => {
+    setLoading(productId);
     await updateQuantity(productId, quantity);
-  }
+    setLoading(undefined);
+  };
   return (
     <>
       <Head>
@@ -23,25 +28,64 @@ export default function CartDetail({ cart, updateQuantity, emptyCart }) {
         </Link>
         {cart.line_items.length !== 0 ? (
           <>
-            <h3 className="mb-10">Cart Total Price: {cart.subtotal.formatted_with_symbol}</h3>
-            <h4 id="cart-items-heading" className="mb-10">Cart items: </h4>
-            <ul aria-labelledby="cart-items-heading" className="flex flex-col gap-y-10">
+            <h3 className="mb-10">
+              Cart Total Price: {cart.subtotal.formatted_with_symbol}
+            </h3>
+            <h4 id="cart-items-heading" className="mb-10">
+              Cart items:{" "}
+            </h4>
+            <ul
+              aria-labelledby="cart-items-heading"
+              className="flex flex-col gap-y-10"
+            >
               {cart.line_items.map((item) => {
                 return (
                   <li key={item.id} className="flex flex-col">
                     <p>{item.name}</p>
                     <small className="mb-5">
-                    {item.price.formatted_with_symbol} X {item.quantity} = {item.line_total.formatted_with_symbol}
+                      {item.price.formatted_with_symbol} X {item.quantity} ={" "}
+                      {item.line_total.formatted_with_symbol}
                     </small>
-                    <div className="flex flex-1 justify-between w-32">
-                      <button onClick={() => {handleUpdateQuantity(item.id, item.quantity + 1)}} className="px-5 bg-green-100 rounded-md">+</button>
-                      <span >{item.quantity}</span>
-                      <button className="px-5 bg-red-100 rounded-md">-</button>
-                    </div>
+                    {loading === item.id ? (
+                      "updating"
+                    ) : (
+                      <>
+                        <div className="flex flex-1 justify-between w-32">
+                          <button
+                            onClick={() => {
+                              handleUpdateQuantity(item.id, item.quantity + 1);
+                            }}
+                            className="px-5 bg-green-100 rounded-md"
+                          >
+                            +
+                          </button>
+                          <span>{item.quantity}</span>
+                          <button
+                            className="px-5 bg-red-100 rounded-md"
+                            onClick={() => {
+                              handleUpdateQuantity(item.id, item.quantity - 1);
+                            }}
+                          >
+                            -
+                          </button>
+                        </div>
+                      </>
+                    )}
                   </li>
                 );
               })}
             </ul>
+            <div className="flex gap-x-5 mt-10">
+              <button
+                onClick={emptyCart}
+                className="rounded-md bg-gray-100 px-8 py-2"
+              >
+                Empty Cart
+              </button>
+              <button className="rounded-md bg-gray-100 px-8 py-2">
+                <Link href="/checkout">Checkout</Link>
+              </button>
+            </div>
           </>
         ) : (
           <p>Please Buy Something</p>
