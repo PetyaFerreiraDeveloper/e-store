@@ -1,12 +1,33 @@
-import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
+import styles from './Navbar.module.css';
 
+const SmartLink = ({ children, href }) => {
+  const router = useRouter();
+  
+  function clickHandler(e) {
+    e.preventDefault();
+    router.push(href);
+  }
+
+  return <a 
+    href={href}
+    onClick={clickHandler}
+    className={router.asPath === href ? styles.activeNavlink : styles.navlink}
+    >
+      {children}
+    </a>;
+};
 const Navbar = () => {
   return (
-    <nav className="flex gap-5">
-      <Link href="/" className="rounded-md px-8 py-2 bg-gray-100">Home</Link>
+    <nav className="flex justify-center items-center mb-10">
+      <SmartLink href="/" >
+        Home
+      </SmartLink>
 
-      <Link href="/cart" className="rounded-md px-8 py-2 bg-gray-100">Cart</Link>
+      <SmartLink href="/cart">
+        Cart
+      </SmartLink>
     </nav>
   );
 };

@@ -1,0 +1,9 @@
+.navlink {
+  padding: 8px 32px 8px 32px;
+}
+
+.activeNavlink {
+  background-color: blue;
+  color: white;
+  padding: 8px 32px 8px 32px;
+}
