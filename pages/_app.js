@@ -49,7 +49,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <Navbar />
+      <Navbar cart={cart} />
       <Component
         cart={cart}
         addToCart={addToCart}

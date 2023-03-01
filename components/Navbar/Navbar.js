@@ -18,7 +18,7 @@ const SmartLink = ({ children, href }) => {
       {children}
     </a>;
 };
-const Navbar = () => {
+const Navbar = ({cart}) => {
   return (
     <nav className="flex justify-center items-center mb-10">
       <SmartLink href="/" >
@@ -26,7 +26,7 @@ const Navbar = () => {
       </SmartLink>
 
       <SmartLink href="/cart">
-        Cart
+        Cart {cart.total_items}
       </SmartLink>
     </nav>
   );
