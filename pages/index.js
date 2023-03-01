@@ -28,7 +28,7 @@ export default function Home({ products, categories, addToCart, emptyCart }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-     
+
       <main className={`${style.main} `}>
         <input
           value={searchTerm}
@@ -112,7 +112,6 @@ export default function Home({ products, categories, addToCart, emptyCart }) {
                     key={product.id}
                     className="cursor-pointer hover:text-blue-700"
                   >
-                    {/* {product.name} */}
                     <Product
                       product={product}
                       addToCart={() => {
@@ -125,16 +124,14 @@ export default function Home({ products, categories, addToCart, emptyCart }) {
             </ul>
 
             <button
-              className="bg-gray-100 rounded-md px-8 py-2"
+              className="bg-red-200 rounded-md px-8 py-2"
               onClick={() => {
                 emptyCart();
               }}
             >
               {" "}
-              Delete{" "}
+              Empty Cart{" "}
             </button>
-
-            {/* <div onClick={() => addToCart('prod_p6dP5gMnp8wn7k')}> add to cart</div>  */}
           </>
         )}
       </main>
