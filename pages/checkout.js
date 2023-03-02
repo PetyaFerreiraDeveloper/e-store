@@ -1,18 +1,40 @@
-import React, { useState } from "react";
+import AddressForm from "../components/Form/AddressForm";
+import Payment from "../components/Payment/Payment";
+import React, { useEffect, useState } from "react";
+import commerce from "../lib/commerce";
 
-const Step1 = () => {
-  return <div>step 1</div>;
-};
-const Step2 = () => {
-  return <div>step 2</div>;
-};
-const Step3 = () => {
-  return <div>step 3</div>;
-};
-
-const Checkout = () => {
+const Checkout = ({ cart }) => {
   const [activeStep, setActiveStep] = useState(0);
-  const steps = [<Step1 />, <Step2 />, <Step3 />];
+  const [checkoutToken, setCheckoutToken] = useState();
+  const [shippingData, setShippingData] = useState();
+
+  useEffect(() => {
+    async function getToken() {
+      if (cart) {
+        try {
+          const token = await commerce.checkout.generateToken(cart.id, {
+            type: "cart",
+          });
+          setCheckoutToken(token);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    }
+
+    getToken();
+  }, [cart]);
+
+  const steps = [
+    <AddressForm
+      setShippingData={(data) => {
+        setShippingData(data);
+        nextStep();
+      }}
+      checkoutToken={checkoutToken}
+    />,
+    <Payment shippingData={shippingData} checkoutToken={checkoutToken} />,
+  ];
 
   const nextStep = () => {
     setActiveStep((prev) => prev + 1);
@@ -24,21 +46,30 @@ const Checkout = () => {
 
   return (
     <div>
-      <h3>Step {activeStep + 1} </h3>
-      {steps[activeStep]}
+      {checkoutToken ? (
+        <>
 
-      <div className="flex gap-3">
-        {activeStep > 0 && (
-          <button onClick={prevStep} className="px-8 py-2 bg-gray-300 rounded">
-            &lt; Back
-          </button>
-        )}
-        {activeStep < steps.length - 1 && (
-          <button onClick={nextStep} className="px-8 py-2 bg-gray-300 rounded">
-            Next &gt;
-          </button>
-        )}
-      </div>
+          {steps[activeStep]}
+
+          <div className="flex gap-3">
+            {activeStep > 0 && (
+              <button
+                onClick={prevStep}
+                className="px-8 py-2 bg-gray-300 rounded"
+              >
+                &lt; Back
+              </button>
+            )}
+            {/* {activeStep < steps.length - 1 && (
+            <button onClick={nextStep} className="px-8 py-2 bg-gray-300 rounded">
+              Next &gt;
+            </button>
+          )} */}
+          </div>
+        </>
+      ) : (
+        "Loading..."
+      )}
     </div>
   );
 };
