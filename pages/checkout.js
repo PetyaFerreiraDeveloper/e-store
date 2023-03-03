@@ -10,14 +10,14 @@ const Checkout = ({ cart }) => {
 
   useEffect(() => {
     async function getToken() {
-      if (cart) {
+      if (Object.keys(cart).length !== 0) {
         try {
           const token = await commerce.checkout.generateToken(cart.id, {
             type: "cart",
           });
           setCheckoutToken(token);
         } catch (error) {
-          console.error(error);
+          console.error('error');
         }
       }
     }
@@ -45,7 +45,7 @@ const Checkout = ({ cart }) => {
   };
 
   return (
-    <div>
+    <div className="flex justify-center">
       {checkoutToken ? (
         <>
 

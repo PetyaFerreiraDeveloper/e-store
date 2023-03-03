@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import CountrySelect from "./CountrySelect";
 import FormInput from "./FormInput";
 
 const addressParams = [
@@ -11,13 +12,23 @@ const addressParams = [
   { name: "zip", type: "number" },
 ];
 
-const AddressForm = ({ checkoutToken }) => {
-  const {handleSubmit, register, setValue} = useForm();
+const AddressForm = ({ checkoutToken, setShippingData }) => {
+  const { handleSubmit, register, setValue } = useForm();
+
+  const submitData = (data) => {
+    setShippingData(data);
+    console.log(data);
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit(submitData)} className="flex flex-col gap-3">
       {addressParams.map((param) => {
-        return <FormInput param={param} register={register} />;
+        return <FormInput param={param} register={register} key={param.name} />;
       })}
+
+      <CountrySelect checkoutToken={checkoutToken} register={register} />
+
+      <button type="submit" >Next</button>
     </form>
   );
 };
