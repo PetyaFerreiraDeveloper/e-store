@@ -5,7 +5,8 @@ import FormSelect from "./FormSelect";
 
 const CountrySelect = ({ checkoutToken, register }) => {
   const [countries, setCountries] = useState([]);
-  const [subDivisions, setSubDivisions] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState();
+  const [subdivisions, setSubdivisions] = useState([]);
   const [shippingOptions, setShippingOptions] = useState([]);
 
   useEffect(() => {
@@ -19,6 +20,7 @@ const CountrySelect = ({ checkoutToken, register }) => {
             return { code: key, name: res.countries[key] };
           });
           setCountries(countriesArray);
+          setSelectedCountry(countriesArray[0].code);
         } catch (error) {
           console.error(error);
         }
@@ -28,7 +30,29 @@ const CountrySelect = ({ checkoutToken, register }) => {
     getData();
   }, []);
 
-  return <FormSelect title="countries" array={countries} register={register} />;
+  useEffect(() => {
+    async function getSubdivisions() {
+      if (selectedCountry) {
+        await commerce.services.localeListShippingSubdivisions(
+          checkoutToken.id,
+          selectedCountry
+        )
+            .then(res => console.log(res))
+            .catch(err=>console.error(err))
+      }
+    }
+
+    getSubdivisions();
+  },[selectedCountry]);
+
+  return (
+    <FormSelect
+      title="country"
+      array={countries}
+      register={register}
+      callback={setSelectedCountry}
+    />
+  );
 };
 
 export default CountrySelect;

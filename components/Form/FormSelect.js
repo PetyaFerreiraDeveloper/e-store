@@ -1,10 +1,18 @@
 import React from "react";
 
-const FormSelect = ({ title, array, register }) => {
+const FormSelect = ({ title, array, register, callback }) => {
   return (
-    <div>
+    <div className="grid grid-cols-[1fr_3fr] gap-3">
       <label htmlFor={title}>{title}</label>
-      <select {...register(title)} id={title}>
+      <select
+        className="border-2"
+        {...register(title)}
+        id={title}
+        onChange={(e) => {
+          e.preventDefault();
+          callback(e.target.value);
+        }}
+      >
         {array.map((obj) => {
           return (
             <option value={obj.code} key={obj.code}>
