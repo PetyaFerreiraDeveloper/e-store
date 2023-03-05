@@ -45,7 +45,7 @@ const Checkout = ({ cart }) => {
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="flex items-center flex-col gap-5">
       {checkoutToken ? (
         <>
 

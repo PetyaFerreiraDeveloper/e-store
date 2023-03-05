@@ -6,7 +6,7 @@ import FormInput from "./FormInput";
 const addressParams = [
   { name: "firstName", type: "text" },
   { name: "lastName", type: "text" },
-  { name: "address1", type: "text" },
+  { name: "address", type: "text" },
   { name: "email", type: "email" },
   { name: "city", type: "text" },
   { name: "zip", type: "number" },
