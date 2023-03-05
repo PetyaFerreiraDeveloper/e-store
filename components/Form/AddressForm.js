@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import CountrySelect from "./CountrySelect";
 import FormInput from "./FormInput";
@@ -14,10 +14,13 @@ const addressParams = [
 
 const AddressForm = ({ checkoutToken, setShippingData }) => {
   const { handleSubmit, register, setValue } = useForm();
+  const [disabled, setDisabled] = useState(true);
+
+  // if any of the data fields is empty - next button should be disabled
 
   const submitData = (data) => {
     setShippingData(data);
-    console.log(data);
+    console.log("customerData", data);
   };
 
   return (
@@ -26,9 +29,24 @@ const AddressForm = ({ checkoutToken, setShippingData }) => {
         return <FormInput param={param} register={register} key={param.name} />;
       })}
 
-      <CountrySelect checkoutToken={checkoutToken} register={register} />
+      <CountrySelect
+        checkoutToken={checkoutToken}
+        register={register}
+        setValue={setValue}
+        setDisabled={setDisabled}
+      />
 
-      <button type="submit" >Next</button>
+      <button
+        className={
+          disabled
+            ? `cursor-not-allowed bg-red-300`
+            : `bg-gray-200 cursor-pointer`
+        }
+        disabled={disabled}
+        type="submit"
+      >
+        Next
+      </button>
     </form>
   );
 };

@@ -6,7 +6,7 @@ const FormSelect = ({ title, array, register, callback }) => {
       <label htmlFor={title}>{title}</label>
       <select
         className="border-2"
-        {...register(title)}
+        {...register(title, {required: true})}
         id={title}
         onChange={(e) => {
           e.preventDefault();
