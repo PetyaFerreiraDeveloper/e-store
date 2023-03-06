@@ -79,7 +79,7 @@ const CountrySelect = ({ checkoutToken, register, setValue, setDisabled }) => {
             });
             setShippingOptions(shippingOptionsArray);
             setSelectedShippingOption(shippingOptionsArray[0].code);
-            setValue("shippping-options", shippingOptionsArray[0].code);
+            setValue("shipping-options", shippingOptionsArray[0].code);
           })
           .catch((err) => console.error(err));
 
@@ -118,7 +118,7 @@ const CountrySelect = ({ checkoutToken, register, setValue, setDisabled }) => {
         <p>fetching shipping options</p>
       ) : (
         <FormSelect
-          title="shippping-options"
+          title="shipping-options"
           array={shippingOptions}
           register={register}
           callback={setSelectedShippingOption}

@@ -20,7 +20,7 @@ const AddressForm = ({ checkoutToken, setShippingData }) => {
 
   const submitData = (data) => {
     setShippingData(data);
-    console.log("customerData", data);
+    // console.log("customerData", data);
   };
 
   return (

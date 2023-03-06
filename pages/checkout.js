@@ -3,7 +3,7 @@ import Payment from "../components/Payment/Payment";
 import React, { useEffect, useState } from "react";
 import commerce from "../lib/commerce";
 
-const Checkout = ({ cart }) => {
+const Checkout = ({ cart, refreshCart }) => {
   const [activeStep, setActiveStep] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState();
   const [shippingData, setShippingData] = useState();
@@ -33,7 +33,7 @@ const Checkout = ({ cart }) => {
       }}
       checkoutToken={checkoutToken}
     />,
-    <Payment shippingData={shippingData} checkoutToken={checkoutToken} />,
+    <Payment shippingData={shippingData} checkoutToken={checkoutToken} refreshCart={refreshCart} />,
   ];
 
   const nextStep = () => {
