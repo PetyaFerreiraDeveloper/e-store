@@ -2,7 +2,11 @@ import React from "react";
 
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+
+import server from '../../__mocks__/server/server';
 import AddressForm from "./AddressForm";
+
+beforeAll(() => server.listen());
 
 describe("address form",  () => {
   it("renders the input fields correctly", async () => {
