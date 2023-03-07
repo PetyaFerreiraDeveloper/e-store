@@ -97,7 +97,7 @@ const CountrySelect = ({ checkoutToken, register, setValue, setDisabled }) => {
       <span>Fetching countries, subdivisions and shipping options... </span>
     );
 
-    // console.log(subdivisions);
+    console.log(subdivisions);
     // console.log(shippingOptions);
 
   return (

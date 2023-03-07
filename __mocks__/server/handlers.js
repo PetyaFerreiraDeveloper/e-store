@@ -7,17 +7,17 @@ export const handlers = [
       return res(
         ctx.json({
           countries: {
-            AN: "Andorra",
-            AU: "Austria",
-            BG: "Bulgaria",
-            USA: "United States",
+            'AD': "Andorra",
+            'AT': "Austria",
+            'BG': "Bulgaria",
+            'US': "United States",
           },
         })
       );
     }
   ),
   rest.get(
-    "https://api.chec.io/v1/services/locale/chkt_QG375vgMmQlrMO/countries/AN/subdivisions",
+    "https://api.chec.io/v1/services/locale/chkt_QG375vgMmQlrMO/countries/AD/subdivisions",
     (req, res, ctx) => {
       return res(
         ctx.json({
@@ -30,13 +30,26 @@ export const handlers = [
     }
   ),
   rest.get(
-    "https://api.chec.io/v1/services/locale/chkt_QG375vgMmQlrMO/countries/AU/subdivisions",
+    "https://api.chec.io/v1/services/locale/chkt_QG375vgMmQlrMO/countries/AT/subdivisions",
     (req, res, ctx) => {
       return res(
         ctx.json({
           subdivisions: {
-            1: "Burgenland",
-            2: "Kärnte",
+            '1': "Burgenland",
+            '2': "Kärnte",
+          },
+        })
+      );
+    }
+  ),
+  rest.get(
+    "https://api.chec.io/v1/services/locale/chkt_QG375vgMmQlrMO/countries/US/subdivisions",
+    (req, res, ctx) => {
+      return res(
+        ctx.json({
+          subdivisions: {
+            'AL': "Alabama",
+            'AK': "Alaska",
           },
         })
       );
@@ -47,7 +60,7 @@ export const handlers = [
     (req, res, ctx) => {
       const query = req.url.searchParams;
       const country = query.get("country");
-      if (country === "USA") {
+      if (country === "US") {
         return res(
           ctx.json([
             {
