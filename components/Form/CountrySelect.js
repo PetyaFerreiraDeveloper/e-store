@@ -77,6 +77,7 @@ const CountrySelect = ({ checkoutToken, register, setValue, setDisabled }) => {
                 name: `${elem.description}-${elem.price.formatted_with_symbol}`,
               };
             });
+
             setShippingOptions(shippingOptionsArray);
             setSelectedShippingOption(shippingOptionsArray[0].code);
             setValue("shipping-options", shippingOptionsArray[0].code);
@@ -96,7 +97,8 @@ const CountrySelect = ({ checkoutToken, register, setValue, setDisabled }) => {
       <span>Fetching countries, subdivisions and shipping options... </span>
     );
 
-    console.log(shippingOptions);
+    // console.log(subdivisions);
+    // console.log(shippingOptions);
 
   return (
     <>
