@@ -22,6 +22,7 @@ const AddressForm = ({ checkoutToken, setShippingData }) => {
     setShippingData(data);
     // console.log("customerData", data);
   };
+  // console.log(checkoutToken);
 
   return (
     <form onSubmit={handleSubmit(submitData)} className="flex flex-col gap-3">
