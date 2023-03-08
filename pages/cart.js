@@ -6,7 +6,6 @@ import { useState } from "react";
 export default function CartDetail({ cart, updateQuantity, emptyCart }) {
   const [loading, setLoading] = useState(undefined);
 
-  console.log(cart);
   if (Object.keys(cart).length === 0) return <span>Loading...</span>;
 
   const handleUpdateQuantity = async (productId, quantity) => {

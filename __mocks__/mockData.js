@@ -38,8 +38,7 @@ export const mockCart = {
       product_name: "Mouse",
       sku: null,
       permalink: "wx4ToL",
-      quantity: 
-      3,
+      quantity: 3,
       price: {
         raw: 150,
         formatted: "150.00",
@@ -92,4 +91,108 @@ export const mockCart = {
     symbol: "kr",
   },
   discount: [],
+};
+
+export const mock_checkout_token = {
+  id: "chkt_RqEv5xgnz7oZz4",
+  cart_id: "cart_NqKE504kpN5dgB",
+  total: {
+    raw: 384,
+    formatted: "384.00",
+    formatted_with_symbol: "kr384.00",
+    formatted_with_code: "384.00 DKK",
+  },
+  created: 1678263784,
+  updated: 1678263784,
+  expires: 1678868584,
+  line_items: [
+    {
+      id: "item_7RyWOwmK5nEa2V",
+      product_id: "prod_4OANwROnAkovYL",
+      name: "Mouse",
+      product_name: "Mouse",
+      sku: null,
+      permalink: "wx4ToL",
+      quantity: 1,
+      price: {
+        raw: 150,
+        formatted: "150.00",
+        formatted_with_symbol: "kr150.00",
+        formatted_with_code: "150.00 DKK",
+      },
+      line_total: {
+        raw: 150,
+        formatted: "150.00",
+        formatted_with_symbol: "kr150.00",
+        formatted_with_code: "150.00 DKK",
+      },
+      is_valid: true,
+      product_meta: [],
+      selected_options: [],
+      variant: null,
+      image: null,
+      tax: {
+        is_taxable: false,
+        taxable_amount: null,
+        amount: null,
+        breakdown: null,
+      },
+    },
+    {
+      id: "item_1ypbroE658n4ea",
+      product_id: "prod_9BAmwJnjb1weXd",
+      name: "Gaming mouse",
+      product_name: "Gaming mouse",
+      sku: null,
+      permalink: "wisR9B",
+      quantity: 1,
+      price: {
+        raw: 234,
+        formatted: "234.00",
+        formatted_with_symbol: "kr234.00",
+        formatted_with_code: "234.00 DKK",
+      },
+      line_total: {
+        raw: 234,
+        formatted: "234.00",
+        formatted_with_symbol: "kr234.00",
+        formatted_with_code: "234.00 DKK",
+      },
+      is_valid: true,
+      product_meta: [],
+      selected_options: [],
+      variant: null,
+      image: null,
+      tax: {
+        is_taxable: false,
+        taxable_amount: null,
+        amount: null,
+        breakdown: null,
+      },
+    },
+  ],
+  shipping_methods: [
+    {
+      id: "ship_bWZ3l8WLO5kpEQ",
+      description: "EU",
+      provider: "chec",
+      price: {
+        raw: 100,
+        formatted: "100.00",
+        formatted_with_symbol: "kr100.00",
+        formatted_with_code: "100.00 DKK",
+      },
+    },
+    {
+      id: "ship_DWy4oGWypo6Jx2",
+      description: "Domestic",
+      provider: "chec",
+      price: {
+        raw: 0,
+        formatted: "0.00",
+        formatted_with_symbol: "kr0.00",
+        formatted_with_code: "0.00 DKK",
+      },
+    },
+  ]
 };

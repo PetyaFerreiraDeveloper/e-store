@@ -7,10 +7,10 @@ export const handlers = [
       return res(
         ctx.json({
           countries: {
-            'AD': "Andorra",
-            'AT': "Austria",
-            'BG': "Bulgaria",
-            'US': "United States",
+            AD: "Andorra",
+            AT: "Austria",
+            BG: "Bulgaria",
+            US: "United States",
           },
         })
       );
@@ -35,8 +35,8 @@ export const handlers = [
       return res(
         ctx.json({
           subdivisions: {
-            '1': "Burgenland",
-            '2': "Kärnte",
+            1: "Burgenland",
+            2: "Kärnte",
           },
         })
       );
@@ -48,8 +48,8 @@ export const handlers = [
       return res(
         ctx.json({
           subdivisions: {
-            'AL': "Alabama",
-            'AK': "Alaska",
+            AL: "Alabama",
+            AK: "Alaska",
           },
         })
       );
@@ -91,6 +91,36 @@ export const handlers = [
             countries: ["AD", "AT", "BG"],
           },
         ])
+      );
+    }
+  ),
+  rest.post(
+    "https://api.chec.io/v1/checkouts/chkt_RqEv5xgnz7oZz4",
+    (req, res, ctx) => {
+      const cardNumber = req.body.payment.card.number;
+      if(cardNumber !== '4242424242424242') {
+        return res(
+          ctx.status(403),
+          ctx.json({
+            error: {
+              message: 'Wrong number'
+            }
+          })
+
+        )
+      }
+      return res(
+        ctx.status(201),
+        ctx.json({
+          customer_reference: "BHKB_1234",
+          customer: {
+            firstname: "John",
+            lastname: "Doe",
+          },
+          order_value: {
+            formatted_with_symbol: "kr384.00",
+          },
+        })
       );
     }
   ),

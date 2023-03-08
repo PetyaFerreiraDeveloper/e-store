@@ -52,7 +52,6 @@ const Payment = ({ checkoutToken, shippingData, refreshCart }) => {
         },
       })
       .then((res) => {
-        console.log(res);
         setOrder(res);
         refreshCart();
         setLoading(false);
@@ -82,7 +81,7 @@ const Payment = ({ checkoutToken, shippingData, refreshCart }) => {
 
           <p>Address: {shippingData.address}</p>
           <p>Email: {shippingData.email}</p>
-          <p>City: {shippingData.city}</p>
+          <p data-testid="ct" >City: {shippingData.city}</p>
           <p>Postal Code: {shippingData.zip}</p>
           <p>Country code: {shippingData.country}</p>
           <p>Subdivision Code: {shippingData.subdivision}</p>
@@ -100,9 +99,8 @@ const Payment = ({ checkoutToken, shippingData, refreshCart }) => {
             })}
           </ul>
 
-          <p>
-            Total: {checkoutToken.total.formatted_with_symbol} +{" "}
-            {shippingCharges.price?.formatted_with_symbol} (Shipping charges){" "}
+          <p data-testid="total">
+            Total: {checkoutToken.total.formatted_with_symbol} + {shippingCharges.price?.formatted_with_symbol} (Shipping charges)
           </p>
 
           {error && <h3>Error: {error}</h3>}
