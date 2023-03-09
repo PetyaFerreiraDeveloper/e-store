@@ -1,3 +1,9 @@
+I am following this tutorial for building an ecommerce site with next.js and tdd
+
+https://www.youtube.com/playlist?list=PLCBa_75YlKx6cQc0JNZz-L1ZGFb-pOIyL
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
