@@ -1,8 +1,24 @@
 import { rest } from "msw";
+import { mock_checkout_token } from "../mockData";
 
 export const handlers = [
   rest.get(
     "https://api.chec.io/v1/services/locale/chkt_QG375vgMmQlrMO/countries",
+    (req, res, ctx) => {
+      return res(
+        ctx.json({
+          countries: {
+            AD: "Andorra",
+            AT: "Austria",
+            BG: "Bulgaria",
+            US: "United States",
+          },
+        })
+      );
+    }
+  ),
+  rest.get(
+    "https://api.chec.io/v1/services/locale/chkt_RqEv5xgnz7oZz4/countries",
     (req, res, ctx) => {
       return res(
         ctx.json({
@@ -124,4 +140,7 @@ export const handlers = [
       );
     }
   ),
+  rest.get('https://api.chec.io/v1/checkouts/cart_NqKE50nrdLwdgB',(req, res, ctx) => {
+    return res(ctx.json({...mock_checkout_token}));
+  })
 ];
